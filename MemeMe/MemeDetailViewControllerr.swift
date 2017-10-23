@@ -81,6 +81,18 @@ UINavigationControllerDelegate {
         self.present(activityViewController, animated: true, completion: nil)
         
     }
+    func save() {
+        // Create the meme
+        finalMeme = generateMemedImage()
+        meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, image: myImageView.image!, memedImage: finalMeme)
+        
+        // Add it to the memes array in the Application Delegate
+        let object = UIApplication.shared.delegate
+        let appDelegate = object as! AppDelegate
+        appDelegate.memes.append(meme)
+        
+        print("saved!")
+    }
     
     @IBAction func cancel(_ sender: Any) {
         dismiss(animated: true, completion: nil)    }
@@ -168,18 +180,6 @@ UINavigationControllerDelegate {
         return memedImage
     }
     
-    
-    func save() {
-        // Create the meme
-        finalMeme = generateMemedImage()
-        meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, image: myImageView.image!, memedImage: finalMeme)
-        
-        // Add it to the memes array in the Application Delegate
-        let object = UIApplication.shared.delegate
-        let appDelegate = object as! AppDelegate
-        appDelegate.memes.append(meme)
-        
-    }
     
     func subscribeToKeyboardNotifications() {
         
